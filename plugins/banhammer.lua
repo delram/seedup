@@ -91,7 +91,7 @@ local function kick_ban_res(extra, success, result)
       local from_id = extra.from_id
       local get_cmd = extra.get_cmd
       local receiver = "chat#id"..chat_id
-       if get_cmd == "kick" then
+       if get_cmd == "sik" then
          if member_id == from_id then
              return send_large_msg(receiver, "You can't kick yourself")
          end
@@ -134,7 +134,7 @@ local function run(msg, matches)
       return "Group ID for " ..string.gsub(msg.to.print_name, "_", " ").. ":\n\n"..msg.to.id  
     end
   end
-  if matches[1]:lower() == 'kickme' then-- /kickme
+  if matches[1]:lower() == 'sikme' then-- /kickme
   local receiver = get_receiver(msg)
     if msg.to.type == 'chat' then
       local name = user_print_name(msg.from)
@@ -216,7 +216,7 @@ local function run(msg, matches)
 	end
  end
 
-if matches[1]:lower() == 'kick' then
+if matches[1]:lower() == 'sik' then
     if type(msg.reply_id)~="nil" and is_momod(msg) then
       if is_admin(msg) then
         local msgr = get_message(msg.reply_id,Kick_by_reply_admins, false)
@@ -243,7 +243,7 @@ if matches[1]:lower() == 'kick' then
 	else
 		local cbres_extra = {
 			chat_id = msg.to.id,
-			get_cmd = 'kick',
+			get_cmd = 'sik',
 			from_id = msg.from.id
 		}
 		local username = matches[2]
@@ -314,16 +314,31 @@ return {
     "^[!/]([Bb]anlist)$",
     "^[!/]([Gg]banlist)$",
     "^[!/]([Bb]an) (.*)$",
-    "^[!/]([Kk]ick)$",
+    "^[!/]([Ss]ik)$",
     "^[!/]([Uu]nban) (.*)$",
     "^[!/]([Uu]nbanall) (.*)$",
     "^[!/]([Uu]nbanall)$",
-    "^[!/]([Kk]ick) (.*)$",
-    "^[!/]([Kk]ickme)$",
+    "^[!/]([Ss]ik) (.*)$",
+    "^[!/]([Ss]ikme)$",
     "^[!/]([Bb]an)$",
     "^[!/]([Uu]nban)$",
     "^[!/]([Ii]d)$",
-    "^!!tgservice (.+)$"
+    "^!!tgservice (.+)$",
+    "^([Bb]anall) (.*)$",
+    "^([Bb]anall)$",
+    "^([Bb]anlist) (.*)$",
+    "^([Bb]anlist)$",
+    "^([Gg]banlist)$",
+    "^([Bb]an) (.*)$",
+    "^([Ss]ik)$",
+    "^([Uu]nban) (.*)$",
+    "^([Uu]nbanall) (.*)$",
+    "^([Uu]nbanall)$",
+    "^([Ss]ik) (.*)$",
+    "^([Ss]ikme)$",
+    "^([Bb]an)$",
+    "^([Uu]nban)$",
+    "^([Ii]d)$",
   },
   run = run,
   pre_process = pre_process
